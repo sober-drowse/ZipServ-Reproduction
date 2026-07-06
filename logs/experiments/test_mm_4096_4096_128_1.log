@@ -164,8 +164,8 @@ Triple bitmap vs TC CuBLAS:
   Significant error element count: 236058 (45.02%)
 
 ========== Performance Results ==========
-BF16_triple_bitmap 	 -> 		 Time/ms: 0.139 	 Performance/TFLOPs: 30.88 	 TotalError: 38.99
-CuBLAS_TC  	 -> 		 Time/ms: 0.099 	 Performance/TFLOPs: 43.22 	 TotalError: 0.00
-CuBLAS_non-TC 	 -> 		 Time/ms: 0.492 	 Performance/TFLOPs: 8.74 	 TotalError: 38.98
+BF16_triple_bitmap 	 -> 		 Time/ms: 0.139 	 Performance/TFLOPs: 30.82 	 TotalError: 38.99
+CuBLAS_TC  	 -> 		 Time/ms: 0.100 	 Performance/TFLOPs: 42.86 	 TotalError: 0.00
+CuBLAS_non-TC 	 -> 		 Time/ms: 0.500 	 Performance/TFLOPs: 8.58 	 TotalError: 38.98
 
 ========== Test Complete ==========
