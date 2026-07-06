@@ -1,0 +1,9 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/ -m64 -Xcompiler -fPIC --threads 0 --std=c++11 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o L_API.o -c ../csrc/L_API.cu
+../csrc/./L_Kernel.cuh(617): warning #2912-D: constexpr if statements are a C++17 feature
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+../csrc/L_API.cu(438): error: calling a __device__ function("__bfloat16_as_ushort(    ::__nv_bfloat16)") from a __host__ function("InitBF16MatrixTripleBitmap") is not allowed
+
+1 error detected in the compilation of "../csrc/L_API.cu".
+make: *** [Makefile:59: L_API.o] Error 255

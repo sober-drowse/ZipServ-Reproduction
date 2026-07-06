@@ -1,0 +1,35 @@
+
+     active environment : zipserv
+    active env location : /data/disk2/zzk/miniconda3/envs/zipserv
+            shell level : 2
+       user config file : /data/disk2/zzk/.condarc
+ populated config files : /data/disk2/zzk/miniconda3/.condarc
+                          /data/disk2/zzk/miniconda3/condarc.d/anaconda-auth.yml
+          conda version : 26.3.2
+    conda-build version : not installed
+         python version : 3.13.13.final.0
+                 solver : libmamba (default)
+       virtual packages : __archspec=1=sapphirerapids
+                          __conda=26.3.2=0
+                          __cuda=13.2=0
+                          __glibc=2.39=0
+                          __linux=6.8.0=0
+                          __unix=0=0
+       base environment : /data/disk2/zzk/miniconda3  (writable)
+      conda av data dir : /data/disk2/zzk/miniconda3/etc/conda
+  conda av metadata url : None
+           channel URLs : https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /data/disk2/zzk/miniconda3/pkgs
+                          /data/disk2/zzk/.conda/pkgs
+       envs directories : /data/disk2/zzk/miniconda3/envs
+                          /data/disk2/zzk/.conda/envs
+    temporary directory : /tmp
+               platform : linux-64
+             user-agent : conda/26.3.2 requests/2.33.1 CPython/3.13.13 Linux/6.8.0-124-generic ubuntu/24.04.3 glibc/2.39 solver/libmamba conda-libmamba-solver/26.4.0 libmambapy/2.3.2 aau/0.7.6 c/. s/. e/.
+                UID:GID : 1005:1005
+             netrc file : None
+           offline mode : False
+

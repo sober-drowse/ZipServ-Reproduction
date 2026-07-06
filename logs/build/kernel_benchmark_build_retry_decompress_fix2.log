@@ -1,0 +1,5 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/  -I/data/disk2/zzk/ZipServ-Reproduction/third_party/ZipServ_ASPLOS26/build -m64 --threads 0 --std=c++14 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_decompress.o -c test_decompress.cu
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+/usr/bin/nvcc -ccbin g++ -m64 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_decompress test_decompress.o -lcublas  -lcusparse  -L/data/disk2/zzk/ZipServ-Reproduction/third_party/ZipServ_ASPLOS26/build -lL_API

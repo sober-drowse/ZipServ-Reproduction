@@ -1,0 +1,7 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/  -I/data/disk2/zzk/ZipServ-Reproduction/third_party/ZipServ_ASPLOS26/build -m64 --threads 0 --std=c++14 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_decompress.o -c test_decompress.cu
+test_decompress.cu(14): error: function "host_bfloat16_as_ushort" has already been defined
+
+test_decompress.cu(20): error: function "host_ushort_as_bfloat16" has already been defined
+
+2 errors detected in the compilation of "test_decompress.cu".
+make: *** [Makefile:61: test_decompress.o] Error 255

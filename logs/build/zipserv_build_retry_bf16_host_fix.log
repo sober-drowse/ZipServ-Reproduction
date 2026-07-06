@@ -1,0 +1,279 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/ -m64 -Xcompiler -fPIC --threads 0 --std=c++11 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o L_API.o -c ../csrc/L_API.cu
+../csrc/./L_Kernel.cuh(617): warning #2912-D: constexpr if statements are a C++17 feature
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+../csrc/./L_Kernel.cuh(60): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+../csrc/./L_Kernel.cuh(178): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+../csrc/./L_Kernel.cuh(617): warning #2912-D: constexpr if statements are a C++17 feature
+
+../csrc/./L_Kernel.cuh(1142): warning #177-D: variable "laneId" was declared but never referenced
+
+../csrc/./L_Kernel.cuh(60): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+../csrc/./L_Kernel.cuh(178): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+../csrc/./L_Kernel.cuh(617): warning #2912-D: constexpr if statements are a C++17 feature
+
+../csrc/./L_Kernel.cuh(1142): warning #177-D: variable "laneId" was declared but never referenced
+
+../csrc/./L_Kernel.cuh(60): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+../csrc/./L_Kernel.cuh(178): warning #177-D: variable "mask_before_pos2" was declared but never referenced
+
+../csrc/./L_Kernel.cuh(617): warning #2912-D: constexpr if statements are a C++17 feature
+
+../csrc/./L_Kernel.cuh(1142): warning #177-D: variable "laneId" was declared but never referenced
+
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 231 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 165 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 214 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 148 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 199 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 159 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 162 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 154 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 167 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 153 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 116 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 243 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 202 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii' for 'sm_86'
+ptxas info    : Function properties for _Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, 440 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_86'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii' for 'sm_86'
+ptxas info    : Function properties for _Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, 380 bytes cmem[0]
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 231 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 165 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 214 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 148 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 199 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 159 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 162 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 154 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 167 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 153 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 116 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 243 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 202 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii' for 'sm_89'
+ptxas info    : Function properties for _Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, 440 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_89'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii' for 'sm_89'
+ptxas info    : Function properties for _Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, 380 bytes cmem[0]
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 231 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi7ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 165 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 214 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi6ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 148 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 199 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi5ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 159 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 162 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 154 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 167 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi3ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 153 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi2ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 116 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 243 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi8ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 202 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii' for 'sm_80'
+ptxas info    : Function properties for _Z34BF16TripleBitmap_Decompress_KernelI28TilingConfigBF16TripleBitmapILi4ELi1ELi4ELi0EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihPS4_ii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 440 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_SafeI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii' for 'sm_80'
+ptxas info    : Function properties for _Z31BF16TripleBitmap_MM_Kernel_FastI28TilingConfigBF16TripleBitmapILi4ELi1ELi1ELi1EEEvPKhPK13__nv_bfloat16PKmS8_S8_PKiSA_iihS6_PS4_iiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, 456 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii' for 'sm_80'
+ptxas info    : Function properties for _Z21SplitK_Reduction_BF16P13__nv_bfloat16S0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, 380 bytes cmem[0]
+/usr/bin/nvcc -ccbin g++ --shared -m64 -Xcompiler -fPIC -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o libL_API.so L_API.o -lcublas

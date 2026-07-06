@@ -1,0 +1,208 @@
+diff --git a/csrc/L_API.cu b/csrc/L_API.cu
+index 25dfeec..641f337 100644
+--- a/csrc/L_API.cu
++++ b/csrc/L_API.cu
+@@ -1,3 +1,4 @@
++#include <cstring>
+ /***************************************************************************
+  * Copyright 2025 The ZipServ Authors. All rights reserved.
+  * Licensed under the Apache License, Version 2.0 (the "License");
+@@ -18,6 +19,13 @@
+ #include <string>
+ #include <vector>
+ 
++static inline uint16_t host_bfloat16_as_ushort(__nv_bfloat16 val) {
++    uint16_t bits;
++    std::memcpy(&bits, &val, sizeof(bits));
++    return bits;
++}
++
++
+ cudaError_t LaunchKernelWithConfig_4Param(
+     cudaStream_t stream,
+     const uint8_t* SignMantissa, const __nv_bfloat16* CompressedFull,
+@@ -435,7 +443,7 @@ __host__ int InitBF16MatrixTripleBitmap(
+                                                 __nv_bfloat16 val = A_bf16[row * K + col];
+                                                 
+                                                 // Extract BF16 components
+-                                                uint16_t bf16_bits = __bfloat16_as_ushort(val);
++                                                uint16_t bf16_bits = host_bfloat16_as_ushort(val);
+                                                 uint8_t sign = (bf16_bits >> 15) & 0x1;
+                                                 uint8_t exponent = (bf16_bits >> 7) & 0xFF;
+                                                 uint8_t mantissa = bf16_bits & 0x7F;
+diff --git a/kernel_benchmark/test_decompress.cu b/kernel_benchmark/test_decompress.cu
+index f6cd627..dc3dce5 100644
+--- a/kernel_benchmark/test_decompress.cu
++++ b/kernel_benchmark/test_decompress.cu
+@@ -9,6 +9,9 @@
+ #include <fstream>
+ #include "L_API.cuh"
+ #include "./utils.h"
++#include <cstring>
++
++
+ 
+ // Host-side popcount function to replace __popcll
+ inline int host_popcll(uint64_t val) {
+@@ -106,7 +109,7 @@ void init_host_matrices_bf16_A_only(__nv_bfloat16* A_h, int M, int K,
+             
+             // Assemble into BF16 value
+             uint16_t bf16_bits = ((sign & 0x1) << 15) | ((exponent & 0xFF) << 7) | (mantissa & 0x7F);
+-            A_h[i * K + j] = __ushort_as_bfloat16(bf16_bits);
++            A_h[i * K + j] = host_ushort_as_bfloat16(bf16_bits);
+         }
+     }
+ }
+@@ -138,7 +141,7 @@ void analyze_exponent_distribution(__nv_bfloat16* matrix, int size) {
+     int total_elements = 0;
+     
+     for (int i = 0; i < size; i++) {
+-        uint16_t bits = __bfloat16_as_ushort(matrix[i]);
++        uint16_t bits = host_bfloat16_as_ushort(matrix[i]);
+         int exponent = (bits >> 7) & 0xFF;
+         exp_count[exponent]++;
+         total_elements++;
+@@ -203,13 +206,13 @@ void compare_bf16_matrices(const char* name1, const char* name2,
+             max_abs_diff = std::max(max_abs_diff, abs_diff);
+             max_rel_diff = std::max(max_rel_diff, rel_diff);
+             
+-            if (__bfloat16_as_ushort(matrix1[idx]) == __bfloat16_as_ushort(matrix2[idx])) {
++            if (host_bfloat16_as_ushort(matrix1[idx]) == host_bfloat16_as_ushort(matrix2[idx])) {
+                 identical_count++;
+             } else {
+                 different_count++;
+                 if (diff_shown < max_diff_show) {
+-                    uint16_t bits1 = __bfloat16_as_ushort(matrix1[idx]);
+-                    uint16_t bits2 = __bfloat16_as_ushort(matrix2[idx]);
++                    uint16_t bits1 = host_bfloat16_as_ushort(matrix1[idx]);
++                    uint16_t bits2 = host_bfloat16_as_ushort(matrix2[idx]);
+                     printf("[%d,%d]\t\t%8.4f\t\t%8.4f\t\t%8.4f\t%8.4f (0x%04X vs 0x%04X)\n", 
+                            i, j, val1, val2, abs_diff, rel_diff, bits1, bits2);
+                     diff_shown++;
+@@ -400,7 +403,7 @@ int main(int argc, char** argv)
+     // Print high-frequency exponents after compression
+     printf("\nHigh-frequency exponents after compression:\n");
+     for (int i = 0; i < 7; i++) {
+-        uint16_t bits = __bfloat16_as_ushort(top_exponents_cpu[i]);
++        uint16_t bits = host_bfloat16_as_ushort(top_exponents_cpu[i]);
+         int exponent = (bits >> 7) & 0xFF;
+         printf("  Exponent[%d] = %d\n", i, exponent);
+     }
+diff --git a/kernel_benchmark/test_mm.cu b/kernel_benchmark/test_mm.cu
+index 179a419..c8eabfe 100644
+--- a/kernel_benchmark/test_mm.cu
++++ b/kernel_benchmark/test_mm.cu
+@@ -72,7 +72,7 @@ void print_bf16_matrix(const char* name, __nv_bfloat16* matrix, int rows, int co
+     // Print some BF16 internal details
+     printf("BF16 details example (first 4 elements):\n");
+     for (int i = 0; i < std::min(4, rows * cols); i++) {
+-        uint16_t bits = __bfloat16_as_ushort(matrix[i]);
++        uint16_t bits = host_bfloat16_as_ushort(matrix[i]);
+         uint8_t sign = (bits >> 15) & 0x1;
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         uint8_t mantissa = bits & 0x7F;
+@@ -100,7 +100,7 @@ void print_bf16_matrix_col(const char* name, __nv_bfloat16* matrix, int rows, in
+     // Print some BF16 internal details
+     printf("BF16 details example (first 4 elements):\n");
+     for (int i = 0; i < std::min(4, rows * cols); i++) {
+-        uint16_t bits = __bfloat16_as_ushort(matrix[i]);
++        uint16_t bits = host_bfloat16_as_ushort(matrix[i]);
+         uint8_t sign = (bits >> 15) & 0x1;
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         uint8_t mantissa = bits & 0x7F;
+@@ -157,7 +157,7 @@ void print_compressed_data(const __nv_bfloat16* top_exponents, const uint8_t* si
+     // Print high-frequency exponents
+     printf("High-frequency exponent values (7 entries):\n");
+     for (int i = 0; i < 7; i++) {
+-        uint16_t bits = __bfloat16_as_ushort(top_exponents[i]);
++        uint16_t bits = host_bfloat16_as_ushort(top_exponents[i]);
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         printf("  Exponent[%d] = %d (0x%04X)\n", i, exponent, bits);
+     }
+@@ -176,7 +176,7 @@ void print_compressed_data(const __nv_bfloat16* top_exponents, const uint8_t* si
+     int full_display = std::min(full_count, 20);
+     printf("\nNon-high-frequency element examples (first %d):\n", full_display);
+     for (int i = 0; i < full_display; i++) {
+-        uint16_t bits = __bfloat16_as_ushort(full_values[i]);
++        uint16_t bits = host_bfloat16_as_ushort(full_values[i]);
+         uint8_t sign = (bits >> 15) & 0x1;
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         uint8_t mantissa = bits & 0x7F;
+@@ -245,7 +245,7 @@ void save_bitmap_analysis(const char* filename, const __nv_bfloat16* A_h,
+                 
+                 if (row < M && col < K) {
+                     __nv_bfloat16 val = A_h[row * K + col];
+-                    uint16_t bits = __bfloat16_as_ushort(val);
++                    uint16_t bits = host_bfloat16_as_ushort(val);
+                     uint8_t sign = (bits >> 15) & 0x1;
+                     uint8_t exponent = (bits >> 7) & 0xFF;
+                     uint8_t mantissa = bits & 0x7F;
+diff --git a/kernel_benchmark/utils.h b/kernel_benchmark/utils.h
+index 556c9d9..4354a82 100644
+--- a/kernel_benchmark/utils.h
++++ b/kernel_benchmark/utils.h
+@@ -28,6 +28,19 @@
+ #include <cuda_fp16.h>
+ #include <cuda_bf16.h>
+ #include <cuda_runtime.h>
++
++static inline uint16_t host_bfloat16_as_ushort(__nv_bfloat16 val) {
++    uint16_t bits;
++    std::memcpy(&bits, &val, sizeof(bits));
++    return bits;
++}
++
++static inline __nv_bfloat16 host_ushort_as_bfloat16(uint16_t bits) {
++    __nv_bfloat16 val;
++    std::memcpy(&val, &bits, sizeof(val));
++    return val;
++}
++
+ // Performance Benchmark
+ #define WARM_UP_ITERATION 100
+ #define BENCHMARK_ITERATION 2000
+@@ -157,7 +170,7 @@ void init_host_matrices_bf16(__nv_bfloat16* A_h, __nv_bfloat16* B_h, int M, int
+             
+             // Assemble into BF16 value
+             uint16_t bf16_bits = ((sign & 0x1) << 15) | ((exponent & 0xFF) << 7) | (mantissa & 0x7F);
+-            A_h[i * K + j] = __ushort_as_bfloat16(bf16_bits);
++            A_h[i * K + j] = host_ushort_as_bfloat16(bf16_bits);
+         }
+     }
+     
+@@ -191,7 +204,7 @@ void analyzeExponentDistribution_BF16(__nv_bfloat16* matrix, int M, int K, int*
+     std::map<int, int> exponent_map;
+     
+     for (int i = 0; i < M * K; i++) {
+-        uint16_t bits = __bfloat16_as_ushort(matrix[i]);
++        uint16_t bits = host_bfloat16_as_ushort(matrix[i]);
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         exponent_map[exponent]++;
+     }
+@@ -434,7 +447,7 @@ int CompressBF16MatrixTripleBitmap_Host(
+                                                 __nv_bfloat16 val = A_bf16[row * K + col];
+                                                 
+                                                 // Extract BF16 components
+-                                                uint16_t bf16_bits = __bfloat16_as_ushort(val);
++                                                uint16_t bf16_bits = host_bfloat16_as_ushort(val);
+                                                 uint8_t sign = (bf16_bits >> 15) & 0x1;
+                                                 uint8_t exponent = (bf16_bits >> 7) & 0xFF;
+                                                 uint8_t mantissa = bf16_bits & 0x7F;
+@@ -659,7 +672,7 @@ int CompressBF16MatrixTripleBitmap_Host(
+     std::cout << "  Index   BF16 bits  Sign  Exponent  Mantissa  Float\n";
+     for (int i = 0; i < print_limit; ++i) {
+         __nv_bfloat16 bf16_val = (*compressed_full)[i];
+-        uint16_t bits = __bfloat16_as_ushort(bf16_val);
++        uint16_t bits = host_bfloat16_as_ushort(bf16_val);
+         uint8_t sign = (bits >> 15) & 0x1;
+         uint8_t exponent = (bits >> 7) & 0xFF;
+         uint8_t mantissa = bits & 0x7F;
+@@ -699,7 +712,7 @@ int InitBF16MatrixTripleBitmap_Host(
+     for (int i = 0; i < 7; i++) {
+         // Create BF16 value with exponent part only
+         uint16_t exp_bits = (top_exponent_values[i] & 0xFF) << 7;
+-        (*top_exponents)[i] = __ushort_as_bfloat16(exp_bits);
++        (*top_exponents)[i] = host_ushort_as_bfloat16(exp_bits);
+     }
+     
+     // Call compression function (needs reimplementation for direct BF16 operations)

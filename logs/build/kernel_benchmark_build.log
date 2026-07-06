@@ -1,0 +1,23 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/  -I/data/disk2/zzk/ZipServ-Reproduction/third_party/ZipServ_ASPLOS26/build -m64 --threads 0 --std=c++14 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_mm.o -c test_mm.cu
+./utils.h(160): error: calling a __device__ function("__ushort_as_bfloat16(unsigned short)") from a __host__ function("init_host_matrices_bf16") is not allowed
+
+./utils.h(194): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("analyzeExponentDistribution_BF16") is not allowed
+
+./utils.h(437): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("CompressBF16MatrixTripleBitmap_Host") is not allowed
+
+./utils.h(662): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("CompressBF16MatrixTripleBitmap_Host") is not allowed
+
+./utils.h(702): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__ushort_as_bfloat16E1?") from a __host__ function("InitBF16MatrixTripleBitmap_Host") is not allowed
+
+test_mm.cu(75): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("print_bf16_matrix") is not allowed
+
+test_mm.cu(103): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("print_bf16_matrix_col") is not allowed
+
+test_mm.cu(160): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("print_compressed_data") is not allowed
+
+test_mm.cu(179): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("print_compressed_data") is not allowed
+
+test_mm.cu(248): error: calling a __device__ function("_ZN41_INTERNAL_61ea0afc_10_test_mm_cu_995d482220__bfloat16_as_ushortE1?") from a __host__ function("save_bitmap_analysis") is not allowed
+
+10 errors detected in the compilation of "test_mm.cu".
+make: *** [Makefile:55: test_mm.o] Error 255
