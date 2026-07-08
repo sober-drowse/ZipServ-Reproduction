@@ -1,0 +1,44 @@
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/  -I/data/disk2/zzk/ZipServ-Reproduction/code/ZipServ_ASPLOS26_patched/build -m64 --threads 0 --std=c++14 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_mm.o -c test_mm.cu
+test_mm.cu(669): warning #177-D: variable "tile_m_global" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+test_mm.cu(670): warning #177-D: variable "tile_k_global" was declared but never referenced
+
+test_mm.cu(669): warning #177-D: variable "tile_m_global" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+test_mm.cu(670): warning #177-D: variable "tile_k_global" was declared but never referenced
+
+test_mm.cu(669): warning #177-D: variable "tile_m_global" was declared but never referenced
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+test_mm.cu(670): warning #177-D: variable "tile_k_global" was declared but never referenced
+
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+test_mm.cu: In function ‘void print_bitmap_data(uint64_t*, uint64_t*, uint64_t*, int*, int, int)’:
+test_mm.cu:135:8: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  135 |             printf("%d", (bitmap1[i] >> b) & 1);
+      |        ^     ~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                  |
+      |                                  uint64_t {aka long unsigned int}
+test_mm.cu:140:8: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  140 |             printf("%d", (bitmap2[i] >> b) & 1);
+      |        ^     ~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                  |
+      |                                  uint64_t {aka long unsigned int}
+test_mm.cu:145:8: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  145 |             printf("%d", (bitmap3[i] >> b) & 1);
+      |        ^     ~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                  |
+      |                                  uint64_t {aka long unsigned int}
+/usr/bin/nvcc -ccbin g++ -m64 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_mm test_mm.o -lcublas  -lcusparse  -L/data/disk2/zzk/ZipServ-Reproduction/code/ZipServ_ASPLOS26_patched/build -lL_API
+/usr/bin/nvcc -ccbin g++ -I/usr/local/cuda/include/  -I/data/disk2/zzk/ZipServ-Reproduction/code/ZipServ_ASPLOS26_patched/build -m64 --threads 0 --std=c++14 -maxrregcount=255  --use_fast_math --ptxas-options=-v,-warn-lmem-usage,--warn-on-spills -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_decompress.o -c test_decompress.cu
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+/usr/bin/nvcc -ccbin g++ -m64 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o test_decompress test_decompress.o -lcublas  -lcusparse  -L/data/disk2/zzk/ZipServ-Reproduction/code/ZipServ_ASPLOS26_patched/build -lL_API

@@ -1,0 +1,6 @@
+name: zipserv
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+prefix: /data/disk2/zzk/miniconda3/envs/zipserv

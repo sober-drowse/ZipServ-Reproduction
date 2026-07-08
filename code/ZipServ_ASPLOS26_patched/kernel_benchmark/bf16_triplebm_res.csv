@@ -1,0 +1,7 @@
+Model,Layer,M,K,N,SplitK,Kernel,Duration(ms),TFLOPS
+unknown,unknown,4096,4096,128,1,cuBLAS,0.491603,8.736662
+unknown,unknown,4096,4096,128,1,cuBLAS_TC,0.099363,43.224895
+unknown,unknown,4096,4096,128,1,CompGEMM,0.139089,30.879290
+unknown,unknown,4096,4096,128,1,cuBLAS,0.500422,8.582688
+unknown,unknown,4096,4096,128,1,cuBLAS_TC,0.100216,42.857147
+unknown,unknown,4096,4096,128,1,CompGEMM,0.139375,30.815880
