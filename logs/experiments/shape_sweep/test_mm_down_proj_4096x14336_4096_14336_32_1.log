@@ -1,0 +1,171 @@
+====== BF16 Triple Bitmap Compressed Matrix Multiplication Test ======
+Dimensions: M=4096, K=14336, N=32, SPLIT_K=1
+Debug level: 0
+
+Allocating host memory...
+Allocating device memory...
+Initializing test matrices...
+Copying data to GPU...
+
+========== Running CuBLAS Benchmark ==========
+Running CuBLAS without Tensor Core...
+L2 Cache size: 100663296 bytes, Flush buffer size: 201326592 bytes
+Running CuBLAS with Tensor Core...
+
+========== CuBLAS Result Comparison (Tensor Core vs Non-Tensor Core) ==========
+CuBLAS TC vs non-TC comparison results:
+  Total absolute error: 0.207139
+  Max relative error: 1.03774
+  Average relative error: 9.4745e-05
+  Significant error element count: 1390 (1.06%)
+
+========== Running BF16 Triple Bitmap Compressed Matrix Multiplication Test ==========
+Compressing matrix...
+
+========= Detailed Compression Debug Info =========
+Matrix size: 4096x14336
+Tiling info: 
+  Small tile size: 8x8, count: 917504 (512x1792)
+  Medium tile size: 16x64, count: 57344 (256x224)
+  Global tile size: 64x64, count: 14336 (64x224)
+High-freq exponent list (7 values): 116 117 118 119 120 121 122 
+
+Element statistics:
+  High-frequency exponent elements: 57360048 (97.68%)
+  Non-high-frequency exponent elements: 1518072 (2.59%)
+  Padding count in high-frequency elements: 107123 elements
+  Padding count in non-high-frequency elements: 50741 elements
+  Max high-frequency elements (per global tile): 4032
+  Max non-high-frequency elements (per global tile): 144
+
+Memory usage:
+  Sign+mantissa array size: 57360048 bytes
+  Full BF16 value array size: 3036144 bytes
+  Bitmap size: 22020096 bytes
+  Small tile offset array size: 7340032 bytes
+  Medium tile offset array size: 458752 bytes
+  Global tile offset array size: 114696 bytes
+  Original size: 117440512 bytes
+  Compressed size: 82989736 bytes
+  Compression ratio: 1.415:1
+
+Bitmap examples (first 20 small tiles):
+  TileID   Bitmap1           Bitmap2           Bitmap3           HF-Count  NHF-Count
+        0   9b68b13c67fbbedb   2ed3d585d011612a   438216c2054491c0         60           4
+        1   7b857f706ca8ad8b   1e7d1186165ad435   00ca1869b34f6244         62           2
+        2   423f14e74d5c414c   b4ab2b9a713b98fc   094844248b9226b7         63           1
+        3   03ac9c0df30f778a   b6d9b17208e368ad   60064a0018118951         61           3
+        4   8be168230a884111   1e66969cc5e39ee7   f42c016c3054a408         63           1
+        5   f4bd228450069eaf   2dce53ea6fea2019   4a4a993182994970         63           1
+        6   65b3131aa98b0f4a   fa44fc73ef6cbab1   087001c45014720e         63           1
+        7   7a3fbf98b6fb5b7a   b5ae8d974196ed9c   00f446a3281cc220         62           2
+        8   69a09255c987822f   6305cfba32bebe43   b64a25000940c990         62           2
+        9   ea3ec6edf8e7b3ac   75d321960279e81b   0181680195010450         63           1
+       10   5a44faf384fcf230   a683dfdd314d1b6b   233a71404a1a1ec4         64           0
+       11   cce1733ac77fabee   e09a79e617823d78   17751c4138004201         63           1
+       12   ea635a2ad127582c   0699b4550e55abfb   9186219100c80405         63           1
+       13   e90ffd20b14f7923   dd76228d69bf9491   028008f286201a4c         64           0
+       14   49e723d7a841adea   0238b05db8be6a15   b4096e2047a010d4         64           0
+       15   e22723f8d41e66ff   48c8d8e72fa95710   19080c080b42a825         62           2
+       16   0218b6abcffcad3d   cdfe8954082d55c8   3046054030020040         60           4
+       17   d6d9ff965c5f6d72   296a88ef25bbb707   e08c290086803b88         64           0
+       18   d31a4723389f8f8d   90e53949c459ec3b   a44002b40a6810c1         61           3
+       19   04aed3e761429c72   c2025cf894fe614b   78d0a9684a51638e         62           2
+
+Medium tile offset examples (first 10 medium tiles):
+  TileID   HF-Cumul-Count  NHF-Cumul-Count
+        0              0                0
+        1           1002               22
+        2           1996               52
+        3           2992               80
+        4              0                0
+        5            995               29
+        6           1990               58
+        7           2997               75
+        8              0                0
+        9           1001               23
+
+Global tile offset examples (first 5 global tiles):
+  TileID   HF-Cumul-Count  NHF-Cumul-Count
+        0              0                0
+        1           4000              112
+        2           8000              216
+        3          12016              312
+        4          16016              424
+        5          20016              528
+
+Sign+mantissa array examples (first 20 bytes):
+  Index   Hex        Sign  Mantissa
+      0   f1       1     113
+      1   19       0     25
+      2   f5       1     117
+      3   5e       0     94
+      4   25       0     37
+      5   d3       1     83
+      6   c6       1     70
+      7   fe       1     126
+      8   69       0     105
+      9   0f       0     15
+     10   52       0     82
+     11   a3       1     35
+     12   c6       1     70
+     13   7e       0     126
+     14   6c       0     108
+     15   f8       1     120
+     16   b1       1     49
+     17   d0       1     80
+     18   76       0     118
+     19   6a       0     106
+
+Full BF16 value array examples (first 10 values):
+  Index   BF16 bits  Sign  Exponent  Mantissa  Float
+      0   b9f9       1     115    121    -0.000475
+      1   389d       0     113     29    0.000075
+      2   b893       1     113     19    -0.000070
+      3   3909       0     114      9    0.000131
+      4   376f       0     110    111    0.000014
+      5   b843       1     112     67    -0.000046
+      6   3828       0     112     40    0.000040
+      7   38d1       0     113     81    0.000100
+      8   b884       1     113      4    -0.000063
+      9   b810       1     112     16    -0.000034
+======================================
+Compression statistics:
+  Global tile count: 14336
+  Medium tile count: 57344
+  Small tile count: 917504
+  High-freq elements: 57360048 (97.68%)
+  Non-high-freq elements: 1518072 (2.59%)
+  Max high-freq elements per tile: 4032
+  Max non-high-freq elements per tile: 144
+  High-freq starting value: 115
+  Original size: 117440512 bytes
+  Compressed size: 82989736 bytes
+  Compression ratio: 1.42x
+Allocating GPU memory for compressed data...
+Copying compressed data to GPU...
+Compressed data ready, starting BF16 triple bitmap compression kernel...
+Split_K = 1
+Running warmup...
+Running benchmark...
+
+========== Result Verification ==========
+Verification results:
+Triple bitmap vs non-TC CuBLAS:
+  Total absolute error: 0.207139
+  Max relative error: 1.03774
+  Average relative error: 9.4745e-05
+  Significant error element count: 1390 (1.06%)
+
+Triple bitmap vs TC CuBLAS:
+  Total absolute error: 0
+  Max relative error: 0
+  Average relative error: 0
+  Significant error element count: 0 (0.00%)
+
+========== Performance Results ==========
+BF16_triple_bitmap 	 -> 		 Time/ms: 0.290 	 Performance/TFLOPs: 12.98 	 TotalError: 0.00
+CuBLAS_TC  	 -> 		 Time/ms: 0.244 	 Performance/TFLOPs: 15.37 	 TotalError: 0.00
+CuBLAS_non-TC 	 -> 		 Time/ms: 1.612 	 Performance/TFLOPs: 2.33 	 TotalError: 0.21
+
+========== Test Complete ==========

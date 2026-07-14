@@ -1,0 +1,5 @@
+label,M,K,N,SplitK,compression_ratio,zipserv_time_ms,cublas_tc_time_ms,cublas_nontc_time_ms,zipserv_tflops,cublas_tc_tflops,cublas_nontc_tflops,speedup_vs_cublas_tc,speedup_vs_cublas_nontc,log_file
+square_4096,4096,4096,32,1,1.42,0.098,0.077,0.458,10.96,14.0,2.34,0.7857142857142857,4.673469387755102,logs/experiments/shape_sweep/test_mm_square_4096_4096_4096_32_1.log
+llama_ffn_gateup_11008x4096,11008,4096,32,1,1.42,0.141,0.198,0.714,20.48,14.61,4.04,1.4042553191489364,5.0638297872340425,logs/experiments/shape_sweep/test_mm_llama_ffn_gateup_11008x4096_11008_4096_32_1.log
+mistral_like_gateup_28672x4096,28672,4096,32,1,1.42,0.391,0.499,1.339,19.23,15.07,5.61,1.2762148337595907,3.424552429667519,logs/experiments/shape_sweep/test_mm_mistral_like_gateup_28672x4096_28672_4096_32_1.log
+down_proj_4096x14336,4096,14336,32,1,1.42,0.29,0.244,1.612,12.98,15.37,2.33,0.8413793103448276,5.558620689655173,logs/experiments/shape_sweep/test_mm_down_proj_4096x14336_4096_14336_32_1.log
