@@ -29,6 +29,10 @@
 
 ZipServ 试图解决的问题是：如何让无损压缩不仅减少模型权重存储，还能在 GPU 推理时带来实际加速。
 
+![传统无损压缩 pipeline 与 ZipServ 执行时间对比](assets/paper_figures/zipserv_fig1_motivation.png)
+
+图 1  传统无损压缩 pipeline 与 ZipServ 执行时间对比（来源：原论文 Figure 1）。该图说明，传统 decoupled pipeline 中单独解压阶段会引入明显开销；ZipServ 的研究动机并非单纯提高压缩率，而是让无损压缩在 GPU 推理路径中真正转化为加速收益。
+
 ### 2.2 模型整体架构
 
 ZipServ 由两个核心部分组成：
@@ -38,12 +42,28 @@ ZipServ 由两个核心部分组成：
 
 ZipGEMM 的关键思想是 load-compressed, compute-decompressed：从显存读取压缩权重，在寄存器中即时恢复 BF16 值，然后直接进入 Tensor Core MMA，避免把完整解压后的权重重新写回 global memory。
 
+![ZipServ 系统整体架构](assets/paper_figures/zipserv_fig6_overview.png)
+
+图 2  ZipServ 系统整体架构（来源：原论文 Figure 6）。左侧为离线权重压缩流程，右侧为在线推理执行流程。ZipServ 将 BF16 权重离线编码为 TCA-TBE 格式，并在 decode 阶段通过 fused kernel 直接读取压缩权重完成计算。
+
 ### 2.3 主要创新点
 
 - 利用 BF16 exponent 分布集中这一结构特征，而不是使用通用 Huffman/ANS 变长熵编码。
 - 设计 GPU 友好的 TCA-TBE 固定长度压缩格式，减少 SIMT 分支和串行依赖。
 - 将解压逻辑与 GEMM kernel 融合，降低解压后权重落回 global memory 的额外开销。
 - 区分 prefill 与 decode 阶段，采用 stage-aware inference 策略。
+
+![LLM 权重 BF16 exponent 分布特征](assets/paper_figures/zipserv_fig2_exponent_distribution.png)
+
+图 3  LLM 权重 BF16 exponent 分布特征（来源：原论文 Figure 2）。该图佐证了 ZipServ 的关键统计观察：不同模型权重的 exponent 并非均匀分布，而是集中在少数高频值附近，因此可以用 base exponent 与短 offset 表示大多数权重指数位。
+
+![Tensor-Core-Aware Triple Bitmap Encoding](assets/paper_figures/zipserv_fig7_triple_bitmap.png)
+
+图 4  Tensor-Core-Aware Triple Bitmap Encoding（来源：原论文 Figure 7）。TCA-TBE 将高频 exponent 表示为 3-bit offset，并把 offset 的三个 bit 平面拆成三张 bitmap。该格式牺牲少量极限压缩率，换取固定长度、少分支、适合 GPU SIMT 并行解码的访问模式。
+
+![ZipGEMM 数据移动与指令流水](assets/paper_figures/zipserv_fig8_pipeline.png)
+
+图 5  ZipGEMM 数据移动与指令流水（来源：原论文 Figure 8）。ZipGEMM 的核心是 load-compressed, compute-decompressed：压缩权重从 global memory 读入后，在 shared memory/register 中即时恢复，并直接送入 Tensor Core，减少解压后权重回写 global memory 的中间开销。
 
 ### 2.4 实验大类梳理
 
@@ -126,22 +146,6 @@ Shape sweep 运行与解析：
 ```bash
 bash scripts/run_shape_sweep.sh 0
 python scripts/parse_and_plot_shape_sweep.py
-```
-
-### 3.3 踩坑记录
-
-| 问题 | 现象 | 原因 | 解决方案 |
-|---|---|---|---|
-| GitHub HTTPS 克隆失败 | `Failed to connect to github.com port 443` | 服务器访问 GitHub HTTPS 不稳定 | 改用 GitHub SSH，并配置 SSH key |
-| CUDA 路径不匹配 | `make: /usr/local/cuda/bin/nvcc: No such file or directory` | 官方 Makefile 默认寻找 `/usr/local/cuda`，服务器实际为 `/usr/bin/nvcc` | 编译时显式传入 `CUDA_INSTALL_PATH=/usr CUDA_HOME=/usr` |
-| CUDA BF16 host/device 编译错误 | host 函数调用 `__device__` BF16 转换函数报错 | CUDA 12.0 下部分 BF16 intrinsic 只能在 device 端调用 | 添加 host 端 `std::memcpy` bit 转换函数并替换 host 调用 |
-| benchmark 编译 warning | `printf` 格式与 `uint64_t` 不匹配 | 调试输出格式问题 | 不影响 benchmark 正确编译和运行，暂未修改 |
-| conda 初次使用 ToS 问题 | `Terms of Service have not been accepted` | Anaconda channel 新版条款需要确认 | 执行 `conda tos accept ...` 后创建环境 |
-
-详细记录见：
-
-```text
-docs/pitfalls.md
 ```
 
 ## 4. 代码复现与实验运行
