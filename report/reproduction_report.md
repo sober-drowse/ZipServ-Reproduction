@@ -19,7 +19,7 @@
 - Figure 11 对应的 shape sweep 简化复现。
 - 实验日志、结果 CSV、复刻 PNG/PDF 图表归档。
 
-尚未完整复现的部分包括 DietGPU、nvCOMP、DFloat11 等外部 baseline，Nsight Compute 细粒度 profiling，以及 vLLM 端到端推理实验。这些内容在报告后文作为复现限制和后续工作说明。
+尚未完整复现的部分包括 DietGPU、nvCOMP、DFloat11 等外部 baseline，Nsight Compute 细粒度 profiling，以及 vLLM 端到端推理实验。这些内容在报告后文作为复现限制进行说明。
 
 ## 2. 论文研读阶段
 
@@ -168,7 +168,7 @@ logs/experiments/test_mm_4096_4096_128_1.log
 | cuBLAS_TC | 0.099 | 43.22 | 0.00 |
 | cuBLAS_non-TC | 0.492 | 8.74 | 38.98 |
 
-该实验说明官方 kernel benchmark 已能在当前 L20 服务器上完成编译和运行，是后续批量实验的最小闭环。
+该实验说明官方 kernel benchmark 已能在当前 L20 服务器上完成编译和运行，是批量实验的最小闭环。
 
 ### 4.2 Standalone decompression 实验
 
@@ -303,8 +303,8 @@ figures/reproduced/fig11_shape_sweep_speedup.pdf
 | 官方 Makefile CUDA 路径假设不匹配 | 无法编译 | 脚本中显式传入 CUDA 路径 |
 | CUDA 12.0 BF16 host/device 限制 | 多个 `.cu/.h` 文件编译失败 | 增加 host 端 BF16 bit 转换函数 |
 | 原文硬件与当前硬件不同 | 性能数值不可直接对齐 | 在报告中说明硬件差异并做趋势分析 |
-| 外部 baseline 缺失 | 无法完整复现主对比实验 | 当前先完成官方内置 benchmark，后续补充 |
-| 端到端模型实验资源要求高 | 需要模型权重、多 GPU、vLLM 集成 | 暂作为后续工作 |
+| 外部 baseline 缺失 | 无法完整复现主对比实验 | 本次复现以官方内置 benchmark 为主，未纳入 DietGPU/nvCOMP/DFloat11 适配 |
+| 端到端模型实验资源要求高 | 需要模型权重、多 GPU、vLLM 集成 | 本次未纳入端到端系统复现范围 |
 
 ### 6.2 可复现性评价
 
@@ -314,34 +314,4 @@ figures/reproduced/fig11_shape_sweep_speedup.pdf
 
 隐性技巧：性能结果对 GPU 架构、CUDA 版本、矩阵形状、N、SplitK 和编译参数较敏感。若只根据论文文字复现，很难保证与原文数值完全一致。
 
-总体评价：ZipServ 的 kernel-level 部分具备较好的可复现基础；系统级端到端部分复现门槛较高，需要更多硬件资源、模型资源和工程集成细节。
-
-## 7. 最终交付材料对应
-
-| 交付要求 | 仓库位置 | 状态 |
-|---|---|---|
-| 复现阅读笔记 | `paper_notes/` | 已整理初版 |
-| 实验梳理清单 | `paper_notes/experiment_checklist.md` | 已整理初版 |
-| 论文核心实验逻辑 | `paper_notes/core_experiment_logic.md` | 已整理初版 |
-| 完整工程代码 | `code/ZipServ_ASPLOS26_patched/` | 已提交 |
-| 一键部署脚本 | `scripts/setup_zipserv.sh` | 已提交 |
-| 一键运行脚本 | `scripts/run_minimal_test.sh`, `scripts/run_n_sweep.sh`, `scripts/run_shape_sweep.sh` | 已提交 |
-| 环境配置文件 | `env/environment.yml`, `env/requirements.txt` | 已提交 |
-| 环境说明文档 | `env/environment.md` | 已提交 |
-| 数据集处理代码与说明 | 暂不涉及真实数据集，kernel benchmark 使用合成矩阵 | 已在报告说明 |
-| 全部实验日志 | `logs/build/`, `logs/experiments/` | 已保存 |
-| 实验结果汇总表 | `results/raw/`, `results/processed/` | 已生成 |
-| 复刻图表 | `figures/reproduced/` | 已生成 PNG/PDF |
-| 单篇完整复现报告 | `report/reproduction_report.md` | 已完成 |
-| 个人实践总结 | `report/personal_summary.md` | 已完成 |
-| PPT 汇报材料 | `presentation/ZipServ_reproduction_presentation.pptx` | 已完成 |
-
-## 8. 后续工作建议
-
-如果继续推进完整论文复现，建议按以下优先级进行：
-
-1. 补充 DietGPU、nvCOMP、DFloat11 baseline，完善 Figure 11 主对比。
-2. 使用 Nsight Compute 对 ZipGEMM 做更细粒度 profiling，补充 Figure 12。
-3. 下载可访问模型权重，统计 BF16 exponent 分布，复刻 Figure 2。
-4. 尝试 vLLM 集成与端到端 latency/throughput 测试，补充 Figure 16、Figure 17。
-5. 在不同 GPU 上重复 shape sweep，分析硬件差异对 ZipServ 收益的影响。
+总体评价：ZipServ 的 kernel-level 部分具备较好的可复现基础；系统级端到端部分复现门槛较高，对硬件资源、模型权重、外部 baseline 适配和工程集成细节依赖较强。因此，本报告的结论限定在官方 kernel benchmark 与当前 L20 服务器环境下，不直接外推为对原论文全部系统实验的完整复现。
