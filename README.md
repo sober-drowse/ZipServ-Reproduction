@@ -23,7 +23,8 @@ https://github.com/HPMLL/ZipServ_ASPLOS26
 ├── results/                         # 实验结果摘要与汇总
 ├── figures/                         # 复刻图表
 ├── paper_notes/                     # 论文阅读笔记和实验清单
-└── report/                          # 最终复现报告
+├── report/                          # 最终复现报告
+└── presentation/                    # 最终汇报 PPT
 ```
 
 ## 当前复现状态
@@ -36,6 +37,9 @@ https://github.com/HPMLL/ZipServ_ASPLOS26
 - ZipServ core library 编译
 - kernel benchmark 编译
 - 最小 `test_mm` 实验运行
+- `test_decompress` 正确性验证
+- N sweep 与 shape sweep 简化复现实验
+- 实验日志、结果表格、复刻图表、复现报告和汇报 PPT 整理
 
 最小实验命令：
 
@@ -120,3 +124,18 @@ patches/zipserv_cuda12_bf16_host_fix.patch
 ```
 
 该修改不改变 ZipServ 的压缩格式、核心算法或 benchmark 逻辑，仅用于保证当前服务器环境下可编译运行。
+
+## 最终材料
+
+```text
+paper_notes/                                      # 阅读笔记、实验清单、核心实验逻辑
+code/ZipServ_ASPLOS26_patched/                   # 完整工程代码
+scripts/                                         # 一键部署、运行、解析脚本
+env/                                             # 环境配置与说明
+logs/                                            # 编译与实验日志
+results/                                         # 原始结果与汇总表
+figures/reproduced/                              # 复刻图表 png/pdf
+report/reproduction_report.md                    # Markdown 版实验复现报告
+report/实验复现报告.docx                         # Word 版实验复现报告
+presentation/ZipServ_reproduction_final.pptx     # 最终汇报 PPT
+```
